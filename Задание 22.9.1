@@ -1,0 +1,40 @@
+ def binary_search(arr, target):
+    left = 0
+    right = len(arr) - 1
+
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] < target:
+            left = mid + 1
+        elif arr[mid] > target:
+            right = mid - 1
+        else:
+            return mid
+
+    return left
+
+input_sequence = input("Введите последовательность чисел через пробел: ")
+numbers = input_sequence.split()
+
+try:
+    numbers = [int(num) for num in numbers]
+except ValueError:
+    print("Ошибка: введены некорректные данные")
+    exit()
+
+target_number = input("Введите число для поиска: ")
+
+try:
+    target_number = int(target_number)
+except ValueError:
+    print("Ошибка: введено некорректное число")
+    exit()
+
+numbers.sort()
+
+position = binary_search(numbers, target_number)
+
+if position < len(numbers) and numbers[position] >= target_number:
+    print("Позиция элемента в отсортированном списке:", position)
+else:
+    print("Введенное число не соответствует условию задачи")
